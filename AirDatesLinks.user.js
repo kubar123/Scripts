@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AirDates Additional links
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.1.1
+// @version      0.2.0
 // @description  adds some additional links to airdates
 // @author       kubar123
 // @match        https://www.airdates.tv/
@@ -12,17 +12,17 @@
 (function() {
     'use strict';
     $.noConflict();
-    //Use google icons incase website is down
+
+    //google icons in case website is down
     //@@LINK@@ = search query location
     var link1337xImg="https://www.google.com/s2/favicons?domain=1337x.to";
     var link1337xSearch="https://1337x.to/search/@@LINK@@/1/";
 
     // -----------------------------------------------------------------------------------
 
-   
-    $(".entry").click(function(){
+    $(document).on("click",".entry",function(){
 
-        var name=$(this).find(".title").text();
+        var name=$(this).find(".title").ignore().text();
 
         $(function(){
             // ------ making span --------
@@ -50,4 +50,11 @@
         data+='<a class="link" target="_blank" href="'+newSearch+'">1337x</a>';
         return data
     }
+
+    //Ignore children in .text/.html
+    //usage: var text = $('#test').ignore("span").text();
+    //<div id="test"><b>Hello</b><span> World</span>!!!</div>
+    $.fn.ignore = function(sel){
+        return this.clone().find(sel||">*").remove().end();
+    };
 })();
