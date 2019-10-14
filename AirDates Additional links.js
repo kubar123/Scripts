@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  adds some additional links to airdates
 // @author       kubar123
-// @match        http://www.airdates.tv/
+// @match        https://www.airdates.tv/
 // @grant        none
 // @require https://code.jquery.com/jquery-3.3.1.min.js
 // ==/UserScript==
