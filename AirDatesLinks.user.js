@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AirDates Additional links
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.1
+// @version      0.1.1
 // @description  adds some additional links to airdates
 // @author       kubar123
 // @match        https://www.airdates.tv/
