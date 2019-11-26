@@ -4,7 +4,7 @@
 
 2. Click the 'raw' button. 
 
-   <img src=" https://raw.githubusercontent.com/kubar123/Scripts/master/Images/img1.png" alt="img" align="right" style="zoom:50%;" />
+   <img src="https://raw.githubusercontent.com/kubar123/Scripts/master/Images/img1.png" alt="img" align="right" style="zoom:50%;" />
 
 3. Click the install button
 
