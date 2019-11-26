@@ -4,4 +4,4 @@ Adds buttons under the name of the IMDB movie/show.
 
 
 
-![img](\img.png)
+![img](https://raw.githubusercontent.com/kubar123/Scripts/master/IMDB/img.png)
