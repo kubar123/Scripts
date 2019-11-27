@@ -15,6 +15,8 @@
     var IMG1337x="https://www.google.com/s2/favicons?domain=1337x.to";
     var URLPirateBay="https://www.thepiratebay.org/search/@@LINK@@/0/99/0";
     var IMGPirateBay="https://www.google.com/s2/favicons?domain=thepiratebay.org";
+    var URLTorrentz2="https://torrentz2.eu/searchA?f=@@LINK@@";
+    var IMGTorrentz2="https://www.google.com/s2/favicons?domain=torrentz2.eu";
 
     //TODO: Use tv category or add 's01e01' to link if is tv show
     var itemName;
@@ -38,7 +40,8 @@
         var allButtons=makeaLink(IMG1337x,URL1337x,itemName,"1337x");
         allButtons+="|";
         allButtons+=makeaLink(IMGPirateBay, URLPirateBay,itemName,"TPB");
-
+        allButtons+="|";
+        allButtons+=makeaLink(IMGTorrentz2,URLTorrentz2,itemName, "Torrentz2");
         return allButtons;
     }
 
