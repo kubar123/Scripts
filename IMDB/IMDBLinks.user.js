@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMDB Additional Links
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.1.1
+// @version      0.1.2
 // @description  adds some additional links to airdates
 // @author       kubar123
 // @match        https://www.imdb.com/title/*
@@ -25,6 +25,9 @@
 
     //get show name
     itemName=$(".title_wrapper h1").text();
+
+    //find all multiple spaces and replace with a single space
+    itemName = itemName.replace(/\s+/g,' ').trim();
 
     //is the item a TV show/Movie?
     isTVShow= item.text().indexOf("TV")>=0;
