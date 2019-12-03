@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMDB Additional Links
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.1
+// @version      0.1.1
 // @description  adds some additional links to airdates
 // @author       kubar123
 // @match        https://www.imdb.com/title/*
@@ -50,8 +50,8 @@
         var newSearch=search.replace("@@LINK@@",link);
 
         //make buttons
-        var data='<button onclick="location.href=\''+newSearch+' \'"><img src="'+img+'"/>';
-        data+=name+'</button>';
+        var data='<a href="'+newSearch+'"><img src="'+img+'"/>';
+        data+=name+'</a>';
         return data
     }
 
