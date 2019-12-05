@@ -32,6 +32,7 @@
     //is the item a TV show/Movie?
     isTVShow= item.text().indexOf("TV")>=0;
 
+
     //Add buttons to page
     $(".title_wrapper").append(makeAllLink());
 
@@ -49,8 +50,14 @@
     }
 
     function makeaLink(img,search,link,name){
+        var searchTerm=link;
+        //add season data if is TV show
+        if(isTVShow)
+            searchTerm+=" season 1";
+        
+
         //fix link
-        var newSearch=search.replace("@@LINK@@",link);
+        var newSearch=search.replace("@@LINK@@",searchTerm);
 
         //make buttons
         var data='<a href="'+newSearch+'"><img src="'+img+'"/>';
