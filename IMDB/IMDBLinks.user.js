@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMDB Additional Links
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.1.2
+// @version      0.2.0
 // @description  adds some additional links to airdates
 // @author       kubar123
 // @match        https://www.imdb.com/title/*
