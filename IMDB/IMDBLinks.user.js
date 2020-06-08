@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IMDB Additional Links
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.2.0
+// @version      0.3.0
 // @description  adds some additional links to airdates
 // @author       kubar123
 // @match        https://www.imdb.com/title/*
@@ -12,6 +12,7 @@
     'use strict';
 // LINKS
     var URL1337x="https://1337x.to/search/@@LINK@@/1/";
+    var URLTv1337x="https://1337x.to/category-search/@@LINK@@/TV/1/"
     var IMG1337x="https://www.google.com/s2/favicons?domain=1337x.to";
     var URLPirateBay="https://www.thepiratebay.org/search/@@LINK@@/0/99/0";
     var IMGPirateBay="https://www.google.com/s2/favicons?domain=thepiratebay.org";
@@ -41,7 +42,10 @@
 
     //returns all buttons
     function makeAllLink(){
-        var allButtons=makeaLink(IMG1337x,URL1337x,itemName,"1337x");
+        if(isTVShow)
+            var allButtons=makeaLink(IMG1337x,URLTv1337x,itemName,"1337x");
+        else
+            var allButtons=makeaLink(IMG1337x,URL1337x,itemName,"1337x");
         allButtons+="|";
         allButtons+=makeaLink(IMGPirateBay, URLPirateBay,itemName,"TPB");
         allButtons+="|";
