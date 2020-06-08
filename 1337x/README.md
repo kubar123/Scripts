@@ -1,7 +1,6 @@
-## Adds links to IMDB
+## Adds forward/backwards episode searching for 1337x
 
-Adds buttons under the name of the IMDB movie/show.
+Adds buttons to 1337x. enables easy browsing of episodes. Forwards/backwards episode or season
 
 
-
-![img](https://raw.githubusercontent.com/kubar123/Scripts/master/Images/img1337x.png)
+![img](/../master/Images/img1337x.png)
