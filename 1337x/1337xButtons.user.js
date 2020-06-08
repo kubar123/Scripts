@@ -62,7 +62,7 @@
 
         //get the TV Show name -- remove matched string
         showStr=searchTerm.replace(reg,"");
-        console.log(showStr);
+        //console.log(showStr);
 
         //find season / episode numbers
         // -- [0] = season [1] = episode        
@@ -71,7 +71,7 @@
         seasonNo=epSeasonInfo[0];
         episodeNo=epSeasonInfo[1];
 
-        console.log(epSeasonInfo.toString());
+        //console.log(epSeasonInfo.toString());
         return
 
     }
