@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Media buttons for TV shows
+// @name         1337x Media buttons for TV shows
 // @namespace    https://github.com/kubar123/Scripts
 // @version      0.1
 // @description  Add previous/next buttons to the top of the page. Makes switching between episodes easier
