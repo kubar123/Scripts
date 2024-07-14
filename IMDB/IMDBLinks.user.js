@@ -6,6 +6,7 @@
 // @author       kubar123
 // @match        https://www.imdb.com/title/*
 // @grant        none
+// @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
 
 (function() {
