@@ -23,21 +23,19 @@
     //TODO: Use tv category or add 's01e01' to link if is tv show
     var itemName;
     var isTVShow;
-    var item=$(".title_wrapper");
 
+    var item=$(".hero__primary-text").parent().parent();
     //get show name
-    itemName=$(".title_wrapper h1").text();
+        itemName=$(".hero__primary-text").text();
 
     //find all multiple spaces and replace with a single space
-    itemName = itemName.replace(/\s+/g,' ').trim();
-
-    //is the item a TV show/Movie?
-    isTVShow= item.text().indexOf("TV")>=0;
+    //itemName = itemName.replace(/\s+/g,' ').trim();
+    //is the item a TV show/Movies
+        isTVShow = item.find("[role='presentation']").text().includes("TV Series");
 
 
     //Add buttons to page
-    $(".title_wrapper").append(makeAllLink());
-
+    $(".hero__primary-text").parent().parent().append("<br>"+makeAllLink());
 
 // -------------------------- FUNCTIONS -----------------------------------
 
@@ -65,8 +63,8 @@
         var newSearch=search.replace("@@LINK@@",searchTerm);
 
         //make buttons
-        var data='<a href="'+newSearch+'"><img src="'+img+'"/>';
-        data+=name+'</a>';
+        var data='<a href="'+newSearch+'"><button><img src="'+img+'"/>';
+        data+=name+'</button></a>';
         return data
     }
 
