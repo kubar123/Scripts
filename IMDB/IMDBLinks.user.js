@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         IMDB Additional Links
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.3.0
+// @version      0.3.2
 // @description  adds some additional links to airdates
 // @author       kubar123
 // @match        https://www.imdb.com/title/*
 // @grant        none
+// @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
 
 (function() {
@@ -22,21 +23,19 @@
     //TODO: Use tv category or add 's01e01' to link if is tv show
     var itemName;
     var isTVShow;
-    var item=$(".title_wrapper");
 
+    var item=$(".hero__primary-text").parent().parent();
     //get show name
-    itemName=$(".title_wrapper h1").text();
+        itemName=$(".hero__primary-text").text();
 
     //find all multiple spaces and replace with a single space
-    itemName = itemName.replace(/\s+/g,' ').trim();
-
-    //is the item a TV show/Movie?
-    isTVShow= item.text().indexOf("TV")>=0;
+    //itemName = itemName.replace(/\s+/g,' ').trim();
+    //is the item a TV show/Movies
+        isTVShow = item.find("[role='presentation']").text().includes("TV Series");
 
 
     //Add buttons to page
-    $(".title_wrapper").append(makeAllLink());
-
+    $(".hero__primary-text").parent().parent().append("<br>"+makeAllLink());
 
 // -------------------------- FUNCTIONS -----------------------------------
 
@@ -64,8 +63,8 @@
         var newSearch=search.replace("@@LINK@@",searchTerm);
 
         //make buttons
-        var data='<a href="'+newSearch+'"><img src="'+img+'"/>';
-        data+=name+'</a>';
+        var data='<a href="'+newSearch+'"><button><img src="'+img+'"/>';
+        data+=name+'</button></a>';
         return data
     }
 

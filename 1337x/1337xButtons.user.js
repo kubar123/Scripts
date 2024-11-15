@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         1337x Media buttons for TV shows
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.1
+// @version      0.1.1
 // @description  Add previous/next buttons to the top of the page. Makes switching between episodes easier
 // @author       kubar123
 // @match        https://1337x.to/*
 // @grant        none
+// @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
 
 (function() {
@@ -18,7 +19,6 @@
     // ---- ADD DATA TO BOX ----
     grabDataFromSite();
     addDataToWindow();
-
     return;
 
 
