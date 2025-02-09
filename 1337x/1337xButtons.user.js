@@ -21,34 +21,70 @@
     return;
 
     function addDataToWindow() {
-        //Create buttons
-        // ------- EPISODES ---------
-        // Create episode navigation buttons
-        const firstEpLink = makeTvLink(showStr, 1, seasonNo);
-        const prevEpLink = makeTvLink(showStr, Number.parseInt(episodeNo)-1, seasonNo);
-        const nextEpLink = makeTvLink(showStr, Number.parseInt(episodeNo)+1, seasonNo);
+        const navHtml = buildNavigationHtml();
+        $(".box-info").prepend(navHtml);
+    }
+    
+    function buildNavigationHtml() {
+        return `<div style="margin: 8px 0; text-align: center; background: #2a2a2a; padding: 8px; border-radius: 4px;">
+                    ${createEpisodeButtons(showStr, seasonNo, episodeNo)}
+                    ${createSeasonButtons(showStr, seasonNo, episodeNo)}
+                </div>`;
+    }
+    
+    function createEpisodeButtons(show, season, episode) {
+        const currentEp = Number.parseInt(episode);
+        const firstEpNum = 1;
+        const prevEpNum = currentEp - 1;
+        const nextEpNum = currentEp + 1;
         
-let buttonData = `
-    <div style="margin: 8px 0; text-align: center; background: #2a2a2a; padding: 8px; border-radius: 4px;">
-        <span style="color: #666; margin-right: 5px;">Episodes:</span>
-        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${firstEpLink}/1/"' title="First Episode">⏮</button>
-        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${prevEpLink}/1/"' title="Previous Episode">◀</button>
-        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${nextEpLink}/1/"' title="Next Episode">▶</button>
-        <span style="display: inline-block; margin: 0 12px; border-left: 2px solid #666; height: 28px; vertical-align: middle;"></span>`;
-
-const firstSeasonLink = makeTvLink(showStr, episodeNo, 1);
-const prevSeasonLink = makeTvLink(showStr, episodeNo, Number.parseInt(seasonNo)-1);
-const nextSeasonLink = makeTvLink(showStr, episodeNo, Number.parseInt(seasonNo)+1);
-
-buttonData += `
-        <span style="color: #666; margin-right: 5px;">Seasons:</span>
-        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${firstSeasonLink}/1/"' title="First Season">⏮</button>
-        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${prevSeasonLink}/1/"' title="Previous Season">◀</button>
-        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${nextSeasonLink}/1/"' title="Next Season">▶</button>
-    </div>`;
-
-        // Add buttons to page
-        $(".box-info").before().prepend(buttonData);
+        const firstEpLink = makeTvLink(show, firstEpNum, season);
+        const prevEpLink = makeTvLink(show, prevEpNum, season);
+        const nextEpLink = makeTvLink(show, nextEpNum, season);
+        
+        // Helper function to determine button style based on the target episode number.
+        // If the episode number is 0, apply special styling to indicate it's the 'end'.
+        function buttonStyle(targetEp) {
+            const baseStyle = "margin: 0 3px; padding: 5px 10px; border: none; cursor: pointer;";
+            if (targetEp === 0) {
+                return `${baseStyle}background: #555; color: #f90; border: 1px dashed #ff0;`;
+            }
+            return `${baseStyle}background: #333; color: #f90;`;
+        }
+        
+        return `
+            <span style="color: #666; margin-right: 5px;">Episodes:</span>
+            <button style="${buttonStyle(firstEpNum)}" onclick='location.href="https://1337x.to/search/${firstEpLink}/1/"' title="First Episode">⏮</button>
+            <button style="${buttonStyle(prevEpNum)}" onclick='location.href="https://1337x.to/search/${prevEpLink}/1/"' title="Previous Episode">◀</button>
+            <button style="${buttonStyle(nextEpNum)}" onclick='location.href="https://1337x.to/search/${nextEpLink}/1/"' title="Next Episode">▶</button>
+            <span style="display: inline-block; margin: 0 12px; border-left: 2px solid #666; height: 28px; vertical-align: middle;"></span>`;
+    }
+    
+    function createSeasonButtons(show, season, episode) {
+        const currentSeason = Number.parseInt(season);
+        const firstSeasonNum = 1;
+        const prevSeasonNum = currentSeason - 1;
+        const nextSeasonNum = currentSeason + 1;
+        
+        const firstSeasonLink = makeTvLink(show, episode, firstSeasonNum);
+        const prevSeasonLink = makeTvLink(show, episode, prevSeasonNum);
+        const nextSeasonLink = makeTvLink(show, episode, nextSeasonNum);
+        
+        // Helper function to determine button style based on the target season number.
+        // If the season number is 0, apply special styling to indicate it's the 'end'.
+        function buttonStyle(targetSeason) {
+            const baseStyle = "margin: 0 3px; padding: 5px 10px; border: none; cursor: pointer;";
+            if (targetSeason === 0) {
+                return `${baseStyle}background: #555; color: #f90; border: 1px dashed #ff0;`;
+            }
+            return `${baseStyle}background: #333; color: #f90;`;
+        }
+        
+        return `
+            <span style="color: #666; margin-right: 5px;">Seasons:</span>
+            <button style="${buttonStyle(firstSeasonNum)}" onclick='location.href="https://1337x.to/search/${firstSeasonLink}/1/"' title="First Season">⏮</button>
+            <button style="${buttonStyle(prevSeasonNum)}" onclick='location.href="https://1337x.to/search/${prevSeasonLink}/1/"' title="Previous Season">◀</button>
+            <button style="${buttonStyle(nextSeasonNum)}" onclick='location.href="https://1337x.to/search/${nextSeasonLink}/1/"' title="Next Season">▶</button>`;
     }
 
     function grabDataFromSite() {
@@ -81,17 +117,21 @@ buttonData += `
     function makeTvLink(showN, epN, sN) {
         let episodeNum = Number.parseInt(epN);
         let seasonNo = Number.parseInt(sN);
+
+        //if season or episode is 0, disable the button
+        if(episodeNum === 0 || seasonNo === 0) {
+            return;
+        }
+
+
         //add '0' before ep name to keep format (S**E**)
         if(episodeNum <= 9) {
             episodeNum = `0${episodeNum}`;
-
         }
         //add '0' before Season name to keep format (S**E**)
         if(seasonNo <= 9) {
             seasonNo = `0${seasonNo}`;
         }
-
-
 
         //make the main link
         const mainLink = `${showN} S${seasonNo}E${episodeNum}`;
