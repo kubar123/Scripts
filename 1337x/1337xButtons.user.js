@@ -67,13 +67,21 @@
 
     function makeTvLink(showN, epN, sN) {
         let episodeNum = Number.parseInt(epN);
+        let seasonNo = Number.parseInt(sN);
         //add '0' before ep name to keep format (S**E**)
         if(episodeNum <= 9) {
             episodeNum = `0${episodeNum}`;
+
+        }
+        //add '0' before Season name to keep format (S**E**)
+        if(seasonNo <= 9) {
+            seasonNo = `0${seasonNo}`;
         }
 
+
+
         //make the main link
-        const mainLink = `${showN} S${sN}E${episodeNum}`;
+        const mainLink = `${showN} S${seasonNo}E${episodeNum}`;
         return mainLink;
     }
 })();
