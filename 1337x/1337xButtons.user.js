@@ -23,18 +23,31 @@
     function addDataToWindow() {
         //Create buttons
         // ------- EPISODES ---------
-        const MainLinkDown = makeTvLink(showStr, Number.parseInt(episodeNo)-1, seasonNo);
-        let buttonData = `<button onclick='location.href="https://1337x.to/search/${MainLinkDown}/1/"'>Previous</Button>__`;
-        const MainLinkUp = makeTvLink(showStr, Number.parseInt(episodeNo)+1, seasonNo);
-        buttonData += `<button onclick='location.href="https://1337x.to/search/${MainLinkUp}/1/"'>Next</Button> | ~~ `;
+        // Create episode navigation buttons
+        const firstEpLink = makeTvLink(showStr, 1, seasonNo);
+        const prevEpLink = makeTvLink(showStr, Number.parseInt(episodeNo)-1, seasonNo);
+        const nextEpLink = makeTvLink(showStr, Number.parseInt(episodeNo)+1, seasonNo);
+        
+let buttonData = `
+    <div style="margin: 8px 0; text-align: center; background: #2a2a2a; padding: 8px; border-radius: 4px;">
+        <span style="color: #666; margin-right: 5px;">Episodes:</span>
+        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${firstEpLink}/1/"' title="First Episode">⏮</button>
+        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${prevEpLink}/1/"' title="Previous Episode">◀</button>
+        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${nextEpLink}/1/"' title="Next Episode">▶</button>
+        <span style="display: inline-block; margin: 0 12px; border-left: 2px solid #666; height: 28px; vertical-align: middle;"></span>`;
 
-        // ---------- SEASONS ---------
-        const mainLinkDownS = makeTvLink(showStr, episodeNo, Number.parseInt(seasonNo)-1);
-        buttonData += `|<button onclick='location.href="https://1337x.to/search/${mainLinkDownS}/1/"'>Previous Season</Button> |`;
-        const mainLinkUpS = makeTvLink(showStr, episodeNo, Number.parseInt(seasonNo)+1);
-        buttonData += `<button onclick='location.href="https://1337x.to/search/${mainLinkUpS}/1/"'>Next Season</Button>`;
+const firstSeasonLink = makeTvLink(showStr, episodeNo, 1);
+const prevSeasonLink = makeTvLink(showStr, episodeNo, Number.parseInt(seasonNo)-1);
+const nextSeasonLink = makeTvLink(showStr, episodeNo, Number.parseInt(seasonNo)+1);
 
-        //grab the top box, append data to it
+buttonData += `
+        <span style="color: #666; margin-right: 5px;">Seasons:</span>
+        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${firstSeasonLink}/1/"' title="First Season">⏮</button>
+        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${prevSeasonLink}/1/"' title="Previous Season">◀</button>
+        <button style="margin: 0 3px; padding: 5px 10px; background: #333; border: none; color: #f90; cursor: pointer;" onclick='location.href="https://1337x.to/search/${nextSeasonLink}/1/"' title="Next Season">▶</button>
+    </div>`;
+
+        // Add buttons to page
         $(".box-info").before().prepend(buttonData);
     }
 
