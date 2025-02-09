@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         1337x Media buttons for TV shows
 // @namespace    https://github.com/kubar123/Scripts
-// @version      0.1.2
+// @version      0.1.3 
 // @description  Add previous/next buttons to the top of the page. Makes switching between episodes easier
 // @author       kubar123
 // @match        https://1337x.to/*
@@ -117,11 +117,6 @@
     function makeTvLink(showN, epN, sN) {
         let episodeNum = Number.parseInt(epN);
         let seasonNo = Number.parseInt(sN);
-
-        //if season or episode is 0, disable the button
-        if(episodeNum === 0 || seasonNo === 0) {
-            return;
-        }
 
 
         //add '0' before ep name to keep format (S**E**)
