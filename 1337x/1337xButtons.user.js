@@ -65,16 +65,16 @@ function createEpisodeButtons(show, season, episode) {
     function buttonStyle(targetEp) {
         const baseStyle = "margin: 0 3px; padding: 5px 10px; border: none; cursor: pointer;";
         if (targetEp === 0) {
-            return `${baseStyle}background: #555; color: #f90; border: 1px dashed #ff0;`;
+            return `${baseStyle}background: black; color: white;`;
         }
-        return `${baseStyle}background: #333; color: #f90;`;
+        return `${baseStyle}background: #f14e13; color: white;`;
     }
     
     return `
         <span style="color: #666; margin-right: 5px;">Episodes:</span>
-        <button style="${buttonStyle(firstEpNum)}" onclick='location.href="https://1337x.to/search/${firstEpLink}/1/"' title="First Episode">⏮</button>
-        <button style="${buttonStyle(prevEpNum)}" onclick='location.href="https://1337x.to/search/${prevEpLink}/1/"' title="Previous Episode">◀</button>
-        <button style="${buttonStyle(nextEpNum)}" onclick='location.href="https://1337x.to/search/${nextEpLink}/1/"' title="Next Episode">▶</button>
+        <button style="${buttonStyle(firstEpNum)}" ${firstEpNum === 0 ? '' : 'onmouseover="this.style.background=\'black\'" onmouseout="this.style.background=\'#f14e13\'"'} onclick='location.href="https://1337x.to/search/${firstEpLink}/1/"' title="First Episode">⏮</button>
+        <button style="${buttonStyle(prevEpNum)}" ${prevEpNum === 0 ? '' : 'onmouseover="this.style.background=\'black\'" onmouseout="this.style.background=\'#f14e13\'"'} onclick='location.href="https://1337x.to/search/${prevEpLink}/1/"' title="Previous Episode">◀</button>
+        <button style="${buttonStyle(nextEpNum)}" ${nextEpNum === 0 ? '' : 'onmouseover="this.style.background=\'black\'" onmouseout="this.style.background=\'#f14e13\'"'} onclick='location.href="https://1337x.to/search/${nextEpLink}/1/"' title="Next Episode">▶</button>
         <span style="display: inline-block; margin: 0 12px; border-left: 2px solid #666; height: 28px; vertical-align: middle;"></span>`;
 }
         
@@ -93,16 +93,16 @@ function createSeasonButtons(show, season, episode) {
     function buttonStyle(targetSeason) {
         const baseStyle = "margin: 0 3px; padding: 5px 10px; border: none; cursor: pointer;";
         if (targetSeason === 0) {
-            return `${baseStyle}background: #555; color: #f90; border: 1px dashed #ff0;`;
+            return `${baseStyle}background: black; color: white;`;
         }
-        return `${baseStyle}background: #333; color: #f90;`;
+        return `${baseStyle}background: #f14e13; color: white;`;
     }
     
     return `
         <span style="color: #666; margin-right: 5px;">Seasons:</span>
-        <button style="${buttonStyle(firstSeasonNum)}" onclick='location.href="https://1337x.to/search/${firstSeasonLink}/1/"' title="First Season">⏮</button>
-        <button style="${buttonStyle(prevSeasonNum)}" onclick='location.href="https://1337x.to/search/${prevSeasonLink}/1/"' title="Previous Season">◀</button>
-        <button style="${buttonStyle(nextSeasonNum)}" onclick='location.href="https://1337x.to/search/${nextSeasonLink}/1/"' title="Next Season">▶</button>`;
+        <button style="${buttonStyle(firstSeasonNum)}" ${firstSeasonNum === 0 ? '' : 'onmouseover="this.style.background=\'black\'" onmouseout="this.style.background=\'#f14e13\'"'} onclick='location.href="https://1337x.to/search/${firstSeasonLink}/1/"' title="First Season">⏮</button>
+        <button style="${buttonStyle(prevSeasonNum)}" ${prevSeasonNum === 0 ? '' : 'onmouseover="this.style.background=\'black\'" onmouseout="this.style.background=\'#f14e13\'"'} onclick='location.href="https://1337x.to/search/${prevSeasonLink}/1/"' title="Previous Season">◀</button>
+        <button style="${buttonStyle(nextSeasonNum)}" ${nextSeasonNum === 0 ? '' : 'onmouseover="this.style.background=\'black\'" onmouseout="this.style.background=\'#f14e13\'"'} onclick='location.href="https://1337x.to/search/${nextSeasonLink}/1/"' title="Next Season">▶</button>`;
 }
 
 function makeTvLink(showN, epN, sN) {
