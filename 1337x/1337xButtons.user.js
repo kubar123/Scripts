@@ -18,23 +18,37 @@ function grabDataFromSite() {
 
     //console.log(searchTerm);
 
-    //find 'S**E**'
-    const reg = /S\d\dE\d\d/ig;
-    const seasonEpTerm = searchTerm.match(reg).toString();
+    // First try to find 'S**E**' format
+    const regEpisode = /S\d\dE\d\d/ig;
+    const seasonEpTerm = searchTerm.match(regEpisode);
 
-    //get the TV Show name -- remove matched string
-    showStr = searchTerm.replace(reg,"");
-    //console.log(showStr);
-
-    //find season / episode numbers
-    // -- [0] = season [1] = episode        
-    const reg2 = /\d\d/ig;
-    const epSeasonInfo = seasonEpTerm.match(reg2);
-    seasonNo = epSeasonInfo[0];
-    episodeNo = epSeasonInfo[1];
-
-    //console.log(epSeasonInfo.toString());
-    return;
+    // If S**E** format found
+    if (seasonEpTerm) {
+        //get the TV Show name -- remove matched string
+        showStr = searchTerm.replace(regEpisode,"");
+        
+        //find season / episode numbers
+        // -- [0] = season [1] = episode        
+        const reg2 = /\d\d/ig;
+        const epSeasonInfo = seasonEpTerm[0].match(reg2);
+        seasonNo = epSeasonInfo[0];
+        episodeNo = epSeasonInfo[1];
+    } 
+    // Try to find 'Season X' format
+    else {
+        const regSeason = /Season\s+(\d+)/i;
+        const seasonMatch = searchTerm.match(regSeason);
+        
+        if (seasonMatch) {
+            showStr = searchTerm.replace(regSeason, "").trim();
+            seasonNo = seasonMatch[1].padStart(2, '0');
+            episodeNo = "00"; // Disable episode navigation
+        } else {
+            // Neither format found
+            return false;
+        }
+    }
+    return true;
 }
 
 function addDataToWindow() {
@@ -45,7 +59,7 @@ function addDataToWindow() {
 function buildNavigationHtml() {
     // Assume seasonNo, episodeNo, showStr are available in global scope when called in a browser
     return `<div style="margin: 8px 0; text-align: center; background: #2a2a2a; padding: 8px; border-radius: 4px;">
-                ${createEpisodeButtons(showStr, seasonNo, episodeNo)}
+                ${episodeNo === "00" ? "" : createEpisodeButtons(showStr, seasonNo, episodeNo)}
                 ${createSeasonButtons(showStr, seasonNo, episodeNo)}
             </div>`;
 }
@@ -84,9 +98,9 @@ function createSeasonButtons(show, season, episode) {
     const prevSeasonNum = currentSeason - 1;
     const nextSeasonNum = currentSeason + 1;
     
-    const firstSeasonLink = makeTvLink(show, episode, firstSeasonNum);
-    const prevSeasonLink = makeTvLink(show, episode, prevSeasonNum);
-    const nextSeasonLink = makeTvLink(show, episode, nextSeasonNum);
+    const firstSeasonLink = episode === "00" ? `${show} Season ${firstSeasonNum}` : makeTvLink(show, episode, firstSeasonNum);
+    const prevSeasonLink = episode === "00" ? `${show} Season ${prevSeasonNum}` : makeTvLink(show, episode, prevSeasonNum);
+    const nextSeasonLink = episode === "00" ? `${show} Season ${nextSeasonNum}` : makeTvLink(show, episode, nextSeasonNum);
     
     // Helper function to determine button style based on the target season number.
     // If the season number is 0, apply special styling to indicate it's the 'end'.
@@ -123,8 +137,9 @@ function makeTvLink(showN, epN, sN) {
 if (typeof document !== "undefined") {
     // Here you can assign or compute seasonNo, episodeNo, and showStr as needed.
     // For example, they might be obtained via grabDataFromSite().
-    grabDataFromSite();
-    addDataToWindow();
+    if (grabDataFromSite()) {
+        addDataToWindow();
+    }
 }
 
 // Expose functions for tests (only when running in Node/Bun)
