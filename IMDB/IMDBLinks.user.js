@@ -11,7 +11,7 @@
 
 (() => {
     // 'use strict';
-// LINKS
+    // LINKS
     const URL1337x = "https://1337x.to/search/@@LINK@@/1/";
     const URLTv1337x = "https://1337x.to/category-search/@@LINK@@/TV/1/";
     const IMG1337x = "https://www.google.com/s2/favicons?domain=1337x.to";
@@ -25,17 +25,18 @@
     const itemName = $(".hero__primary-text").text();
     const isTVShow = item.find("[role='presentation']").text().includes("TV Series");
 
-    //Add buttons to page
+    //Add buttons to page with extra padding added below the buttons
     $(".hero__primary-text").parent().parent().append(`<br>${makeAllLink()}`);
 
-// -------------------------- FUNCTIONS -----------------------------------
+    // -------------------------- FUNCTIONS -----------------------------------
 
-    //returns all buttons
+    //returns all buttons wrapped in a container that adds padding beneath them
     function makeAllLink(){
         const allButtons = isTVShow
             ? makeaLink(IMG1337x, URLTv1337x, itemName, "1337x")
             : makeaLink(IMG1337x, URL1337x, itemName, "1337x");
-        return `${allButtons}|${makeaLink(IMGPirateBay, URLPirateBay, itemName, "TPB")}|${makeaLink(IMGTorrentz2, URLTorrentz2, itemName, "Torrentz2")}`;
+        const combinedButtons = `${allButtons}|${makeaLink(IMGPirateBay, URLPirateBay, itemName, "TPB")}|${makeaLink(IMGTorrentz2, URLTorrentz2, itemName, "Torrentz2")}`;
+        return `<div style="padding-bottom: 5px;">${combinedButtons}</div>`;
     }
 
     function makeaLink(img, search, link, name) {
@@ -44,10 +45,12 @@
         //fix link
         const newSearch = search.replace("@@LINK@@", searchTerm);
 
-        //make buttons using template literals
-        const data = `<a href="${newSearch}"><button><img src="${img}"/>${name}</button></a>`;
+        //make button with similar styling to 1337x's but with yellow text instead of orange
+        const data = `<a href="${newSearch}">
+            <button style="margin: 0 3px; padding: 5px 10px; background: #333; color: #ff0; border: none; cursor: pointer;">
+                <img src="${img}" style="vertical-align: middle;"/> ${name}
+            </button>
+        </a>`;
         return data;
     }
-
-
 })();
