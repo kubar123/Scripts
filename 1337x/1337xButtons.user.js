@@ -9,7 +9,13 @@
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
 
-// GLOBAL function definitions for testing and script execution
+/**
+ * Main function to extract show information from the search page.
+ * Parses the search term to find TV show name, season number, and episode number.
+ * Handles both S**E** format (e.g. S01E05) and "Season X" format.
+ * Sets global variables showStr, seasonNo, and episodeNo.
+ * @returns {boolean} True if parsing succeeded, false otherwise
+ */
 function grabDataFromSite() {
     //get search from site
     let searchTerm = $(".box-info-heading :contains('Searching for:')").text();
@@ -51,11 +57,20 @@ function grabDataFromSite() {
     return true;
 }
 
+/**
+ * Adds the navigation HTML to the page.
+ * Prepends the navigation buttons to the .box-info element.
+ */
 function addDataToWindow() {
     const navHtml = buildNavigationHtml();
     $(".box-info").prepend(navHtml);
 }
         
+/**
+ * Builds the main navigation HTML container.
+ * Includes both episode and season navigation if applicable.
+ * @returns {string} HTML string containing navigation buttons
+ */
 function buildNavigationHtml() {
     // Assume seasonNo, episodeNo, showStr are available in global scope when called in a browser
     return `<div style="margin: 8px 0; text-align: center; background: #2a2a2a; padding: 8px; border-radius: 4px;">
@@ -64,6 +79,14 @@ function buildNavigationHtml() {
             </div>`;
 }
         
+/**
+ * Creates the episode navigation buttons HTML.
+ * Includes first, previous, and next episode buttons.
+ * @param {string} show - The TV show name
+ * @param {string} season - The season number
+ * @param {string} episode - The current episode number
+ * @returns {string} HTML string containing episode navigation buttons
+ */
 function createEpisodeButtons(show, season, episode) {
     const currentEp = Number.parseInt(episode);
     const firstEpNum = 1;
@@ -92,6 +115,14 @@ function createEpisodeButtons(show, season, episode) {
         <span style="display: inline-block; margin: 0 12px; border-left: 2px solid #666; height: 28px; vertical-align: middle;"></span>`;
 }
         
+/**
+ * Creates the season navigation buttons HTML.
+ * Includes first, previous, and next season buttons.
+ * @param {string} show - The TV show name
+ * @param {string} season - The current season number
+ * @param {string} episode - The current episode number
+ * @returns {string} HTML string containing season navigation buttons
+ */
 function createSeasonButtons(show, season, episode) {
     const currentSeason = Number.parseInt(season);
     const firstSeasonNum = 1;
@@ -119,6 +150,14 @@ function createSeasonButtons(show, season, episode) {
         <button style="${buttonStyle(nextSeasonNum)}" ${nextSeasonNum === 0 ? '' : 'onmouseover="this.style.background=\'black\'" onmouseout="this.style.background=\'#f14e13\'"'} onclick='location.href="https://1337x.to/search/${nextSeasonLink}/1/"' title="Next Season">▶</button>`;
 }
 
+/**
+ * Creates a formatted TV show link string.
+ * Pads season and episode numbers with leading zeros if needed.
+ * @param {string} showN - The TV show name
+ * @param {string|number} epN - The episode number
+ * @param {string|number} sN - The season number
+ * @returns {string} Formatted string like "Show Name S01E02"
+ */
 function makeTvLink(showN, epN, sN) {
     let episodeNum = Number.parseInt(epN);
     let seasonNum = Number.parseInt(sN);
